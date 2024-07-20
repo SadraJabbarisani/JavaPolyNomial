@@ -20,5 +20,22 @@ public class Run {
         polyNomial = new Polynomial(cin.nextLine());
         
         System.out.println(polyNomial.toString());
+        System.out.println(polyNomial.evaluate(2));
+        
+        polyNomial.sum(new Polynomial("-5X^3-2X^2+8X^1"));
+        System.out.println(polyNomial.toString());
+
+        
+//        String polynomial = "3x^2 + 5x - 7";
+//        
+//        // Split the polynomial string using regular expression pattern
+//        String[] terms = polynomial.split("\\s*[+\\-]\\s*");
+//        
+//        // Display each term
+//        for (String term : terms) {
+//            System.out.println(term.trim());
+//        }
+    
+
     }
 }
