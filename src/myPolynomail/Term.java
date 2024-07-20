@@ -12,6 +12,7 @@ public class Term {
         String [] Component = input.split("[X^]");
         coeff = Integer.parseInt(Component[0]);
         pow = Integer.parseInt(Component[2]);
+        System.out.println("term constractor");
     }
 
     public int getCoeff() {
