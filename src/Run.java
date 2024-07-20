@@ -3,39 +3,20 @@ import myPolynomail.*;
 
 public class Run {
     public static void main(String[] args) {
-        Polynomial polyNomial;
-        Scanner cin = new Scanner(System.in);
-//        System.out.print("Enter Your polynomial :");
-//        String[] sArr = cin.nextLine().split("[+-]");
-//        for (String s : sArr){
-//            System.out.println(s);
-//        }
+        Polynomial poly1 = new Polynomial("4X^3-5X^2+3X^1+11X^0");
+        Polynomial poly2 = new Polynomial("3X^2+5X^1-16X^0");
         
-//        System.out.print("Enter Your Term :");
-//        String[] sNumArr = cin.nextLine().split("[X^]");
-//        System.out.println(sNumArr[0]);
-//        System.out.println(sNumArr[2]);
-// 
-        System.out.print("Enter Your polynomial :");
-        polyNomial = new Polynomial(cin.nextLine());
+        System.out.println("poly1 :" + poly1.toString());
+        System.out.println("poly2 :" + poly2.toString());
+        System.out.println("");
         
-        System.out.println(polyNomial.toString());
-        System.out.println(polyNomial.evaluate(2));
+//        System.out.print("poly1 + poly2: ");System.out.println(poly1.sum(poly2)     .toString());
+//        System.out.print("poly1 * poly2: ");System.out.println(poly1.multiply(poly2).toString());
+        System.out.print("poly1 / poly2: ");System.out.println(poly1.divide(poly2)  .toString());
+//        System.out.print("poly1 - poly2: ");System.out.println(poly1.subtract(poly2).toString());
+        System.out.println("");
         
-        polyNomial.sum(new Polynomial("-5X^3-2X^2+8X^1"));
-        System.out.println(polyNomial.toString());
-
-        
-//        String polynomial = "3x^2 + 5x - 7";
-//        
-//        // Split the polynomial string using regular expression pattern
-//        String[] terms = polynomial.split("\\s*[+\\-]\\s*");
-//        
-//        // Display each term
-//        for (String term : terms) {
-//            System.out.println(term.trim());
-//        }
-    
-
+        System.out.println("poly1 :" + poly1.toString());
+        System.out.println("poly2 :" + poly2.toString());
     }
 }
