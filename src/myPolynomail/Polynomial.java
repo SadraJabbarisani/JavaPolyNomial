@@ -1,12 +1,14 @@
 package myPolynomail;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Polynomial {
-    Term[] term;
+    ArrayList<Term> term;
+    
+    public static Polynomial negOne = new Polynomial("-1X^0");
 
     public Polynomial() {
-        term = new Term[0];
+        term = new ArrayList();
     }
     
     public Polynomial(String input) {
@@ -19,25 +21,27 @@ public class Polynomial {
                 if(i == 0 && t[0] == ""){
                     
                 }else if (i == 0){
-                    term = Arrays.copyOf(term, term.length+1);
-                    term[term.length-1] = new Term(t[0]);
+                    term.add(new Term(t[0]));
                 }else{
-                    term = Arrays.copyOf(term, term.length+1);
                     String hhh = "-" + t[i];
-                    term[term.length-1] = new Term(hhh);
+                    term.add(new Term(hhh));
                 }
             }
         }
-        
     }
     
-    public void addTerm(Term newTerm){
-        term = Arrays.copyOf(term, term.length+1);
-        term[term.length-1] = newTerm;
+    public void addTerm(Term term){
+        for(Term t : this.term){
+            if(term.pow == t.pow){
+                t.coeff += term.coeff;
+                return;
+            }
+        }
+        this.term.add(term);
     }
     
     public String toString(){
-        String outPut = "Poly is: ";
+        String outPut = "";
         for(Term t: term){
             outPut += t.toString();
         }
@@ -53,18 +57,56 @@ public class Polynomial {
     }
     
     public Polynomial sum(Polynomial right){
-        for(Term rTerm: right.term){
-            for(Term tTerm: this.term){
-                if(rTerm.pow == tTerm.pow)
-                    tTerm.coeff += rTerm.coeff;
-            }
+
+        Polynomial result = this;
+        for(Term rTerm : right.term){
+            result.addTerm(rTerm);
         }
-        return this;
+        return result;
     }
     
     public Polynomial multiply (Polynomial right){
-        Polynomial[] polys = new Polynomial[term.length];
+        Polynomial[] poly = new Polynomial[term.size()];
+        int i = 0;
         
-        return this;
+        for(Term tTerm : this.term){
+            poly[i] = new Polynomial();
+            for(Term rTerm : right.term){
+                Term newT = new Term(tTerm.coeff*rTerm.coeff,tTerm.pow + rTerm.pow);
+                poly[i].addTerm(newT);
+            }
+            i++;
+        }
+        
+        Polynomial result = new Polynomial();
+        for(Polynomial p : poly){
+            result = result.sum(p);
+        }
+        return result;
+    }
+    
+    public Polynomial subtract(Polynomial right){
+        Polynomial negright = right.multiply(negOne);
+        return sum(negright);
+    }
+    
+    public Polynomial divide(Polynomial right){
+        Polynomial[] poly = new Polynomial[term.size()];
+        int i = 0;
+        
+        for(Term tTerm : this.term){
+            poly[i] = new Polynomial();
+            for(Term rTerm : right.term){
+                Term newT = new Term(tTerm.coeff/rTerm.coeff,tTerm.pow - rTerm.pow);
+                poly[i].addTerm(newT);
+            }
+            i++;
+        }
+        
+        Polynomial result = new Polynomial();
+        for(Polynomial p : poly){
+            result = result.sum(p);
+        }
+        return result;
     }
 }

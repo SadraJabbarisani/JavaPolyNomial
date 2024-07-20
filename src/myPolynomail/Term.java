@@ -44,6 +44,22 @@ public class Term {
         if(coeff == 0)
             return "";
         
+        if(pow == 0){
+            if(isPosetive()){
+                return "+" + Math.abs(coeff);
+            }else{
+                return "-" + Math.abs(coeff);
+            }
+        }
+        
+        if(pow == 1){
+            if(isPosetive()){
+                return "+" + Math.abs(coeff) + "X";
+            }else{
+                return "-" + Math.abs(coeff) + "X";
+            }
+        }
+        
         if(isPosetive())
             return "+" + Math.abs(coeff) + "X^" + pow;
         else{
